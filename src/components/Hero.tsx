@@ -51,7 +51,7 @@ export default function Hero() {
             Data Science
           </motion.p>
           <motion.p
-            className="mb-8 text-base sm:text-lg text-[var(--muted)]"
+            className="mb-8 text-base sm:text-lg font-medium !text-black drop-shadow-[0_10px_22px_rgba(0,0,0,0.25)]"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
