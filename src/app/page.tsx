@@ -1,31 +1,26 @@
-import Background from "@/components/Background";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Education from "@/components/Education";
-import Experience from "@/components/Experience";
+import JourneyTimeline from "@/components/JourneyTimeline";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
-import Leadership from "@/components/Leadership";
-import Certifications from "@/components/Certifications";
-import ResumeCTA from "@/components/ResumeCTA";
-import Contact from "@/components/Contact";
+import GetInTouch from "@/components/GetInTouch";
 
 export default function Home() {
+  const year = new Date().getFullYear();
+
   return (
     <>
-      <Background />
-      <Header />
-      <main>
+      <main className="relative z-[1] min-w-0 overflow-x-clip">
         <Hero />
-        <Education />
-        <Experience />
+        <JourneyTimeline />
         <Projects />
         <Skills />
-        <Leadership />
-        <Certifications />
-        <ResumeCTA />
-        <Contact />
+        <GetInTouch />
       </main>
+      <footer className="relative z-[1] border-t border-[var(--ui-border-subtle)] bg-[var(--nav-bg)]/65 backdrop-blur-md">
+        <div className="mx-auto max-w-6xl px-5 py-5 text-center text-xs tracking-[0.08em] text-[var(--muted)] sm:px-6 lg:px-8">
+          © {year} Pranavi Immanni. All rights reserved.
+        </div>
+      </footer>
     </>
   );
 }

@@ -8,9 +8,20 @@ export interface ExperienceItem {
 
 export const experience: ExperienceItem[] = [
   {
-    title: "AV Event Services Technician",
+    title: "Data Science Intern",
+    org: "Viasat · San Diego, CA",
+    period: "Present",
+    bullets: [
+      "Support **analytics and modeling** initiatives that turn operational and product data into **actionable insights**.",
+      "Partner with teams on **data quality**, reporting, and visualization to inform technical and business decisions.",
+      "Apply **Python/SQL** and statistical methods in a fast-paced engineering environment focused on connectivity solutions.",
+    ],
+    skills: ["Python", "SQL", "Analytics", "Data Visualization", "Cross-functional Collaboration"],
+  },
+  {
+    title: "AV & Event Services",
     org: "San Jose State University · San Jose, CA",
-    period: "—",
+    period: "Present",
     bullets: [
       "Set up and operated audiovisual equipment for campus events, ensuring **reliable delivery** and **minimal downtime**.",
       "Coordinated with event organizers to meet technical requirements; **supported 50+ events** per semester.",
@@ -21,7 +32,7 @@ export const experience: ExperienceItem[] = [
   {
     title: "Data Science Intern",
     org: "SysIntelli · San Diego, CA",
-    period: "—",
+    period: "June 2025 – August 2025",
     bullets: [
       "Developed data pipelines and analytics solutions to support product and operations decisions.",
       "Delivered **impactful insights** through EDA, reporting, and visualization for stakeholder reviews.",
@@ -32,7 +43,7 @@ export const experience: ExperienceItem[] = [
   {
     title: "Research Development Engineer Intern",
     org: "STEM-Away · Remote",
-    period: "—",
+    period: "July 2020 – August 2020",
     bullets: [
       "Contributed to research and development projects at the intersection of data science and engineering.",
       "Built and documented **reusable components** and **best practices** for the team.",

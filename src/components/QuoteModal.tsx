@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getQuoteForDate, MOTIVATIONAL_QUOTES } from "@/data/quotes";
+import { getQuoteForDate } from "@/data/quotes";
 
 const STORAGE_KEY = "portfolio-quote-lastShownDate";
 
-/** Set to true to test: modal shows every page load. Set to false for production (once per day). */
-const DEBUG_ALWAYS_SHOW_QUOTE = true;
+const DEBUG_ALWAYS_SHOW_QUOTE = false;
 
 function getTodayString(): string {
   return new Date().toDateString();
@@ -43,26 +42,22 @@ export default function QuoteModal() {
     const quoteText = getQuoteForDate(date);
     setQuote(quoteText);
 
-    const dayOfYear = Math.floor(
-      (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24)
-    );
-    const index = dayOfYear % MOTIVATIONAL_QUOTES.length;
-
     const forceShowViaUrl =
       typeof window !== "undefined" &&
       (window.location.search.includes("showQuote=1") || window.location.search.includes("quote=1"));
     const show = shouldShowModal(forceShowViaUrl);
 
-    console.log("[QuoteModal] trigger check:", {
-      show,
-      dayOfYear,
-      index,
-      quotePreview: quoteText.slice(0, 50) + "...",
-      debugAlwaysShow: DEBUG_ALWAYS_SHOW_QUOTE,
-    });
-
     if (show) setOpen(true);
   }, [mounted]);
+
+  useEffect(() => {
+    const openQuote = () => {
+      setQuote(getQuoteForDate(new Date()));
+      setOpen(true);
+    };
+    window.addEventListener("portfolio-open-quote", openQuote);
+    return () => window.removeEventListener("portfolio-open-quote", openQuote);
+  }, []);
 
   const handleClose = () => {
     markShownToday();
@@ -74,44 +69,70 @@ export default function QuoteModal() {
       {open && quote && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/50 z-[100]"
+            className="fixed inset-0 z-[100] bg-black/45 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.32 }}
             onClick={handleClose}
             aria-hidden
           />
           <motion.div
             className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-[90%] max-w-md px-2"
-            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            initial={{ opacity: 0, scale: 0.98, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             role="dialog"
             aria-modal="true"
             aria-label="Daily inspiration"
           >
             <div
-              className="rounded-2xl p-6 shadow-xl border border-black/8"
+              className="relative rounded-2xl p-7 sm:p-8 overflow-hidden border border-[var(--ui-border)]"
               style={{
-                background: "rgba(255,255,255,0.94)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
+                background:
+                  "linear-gradient(155deg, rgba(74,73,80,0.94) 0%, rgba(104,103,114,0.92) 100%)",
+                backdropFilter: "blur(18px)",
+                WebkitBackdropFilter: "blur(18px)",
+                boxShadow:
+                  "0 24px 56px rgba(0,0,0,0.45), 0 0 0 1px rgba(245,143,124,0.12) inset",
               }}
             >
-              <p className="text-sm font-medium text-accent uppercase tracking-wider mb-3">
+              <div
+                className="pointer-events-none absolute -top-20 -right-12 h-44 w-44 rounded-full opacity-40"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(245,143,124,0.22) 0%, transparent 68%)",
+                }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -bottom-16 -left-10 h-36 w-36 rounded-full opacity-32"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(242,196,206,0.18) 0%, transparent 68%)",
+                }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute top-6 right-6 h-16 w-16 rounded-full opacity-25"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(245,143,124,0.28) 0%, transparent 70%)",
+                }}
+                aria-hidden
+              />
+              <p className="relative text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent-peach)] mb-4">
                 Daily inspiration
               </p>
-              <p className="text-[var(--text)] text-lg leading-relaxed mb-6">
+              <p className="relative text-[var(--text)] text-lg sm:text-xl leading-relaxed mb-8 font-normal">
                 &ldquo;{quote}&rdquo;
               </p>
-              <div className="flex justify-end">
+              <div className="relative flex justify-end">
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-[var(--text-muted)] hover:text-accent border border-black/10 hover:border-accent/30 transition-colors"
+                  className="px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-[0.12em] text-[var(--muted)] hover:text-[var(--text-heading)] border border-[var(--ui-border)] hover:border-[var(--accent-peach)]/45 hover:bg-[var(--ui-surface)] transition-all duration-300"
                 >
                   Close
                 </button>

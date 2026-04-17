@@ -8,88 +8,136 @@ const NATURE_TRAIL_IMAGE =
   "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80";
 
 const USER_IMAGES = [
-  { src: "/images/B9FDA18D-1B80-4F97-BF55-DE711712C661-e1575aa4-c64c-4890-92a2-fbc145b5dbee.png", alt: "" },
-  { src: "/images/about-beach-alt.png", alt: "" },
-  { src: "/images/IMG_5937-3c0828fe-0819-4c9a-96ab-9efd9bef1268.png", alt: "" },
+  { src: "/images/B9FDA18D-1B80-4F97-BF55-DE711712C661-e1575aa4-c64c-4890-92a2-fbc145b5dbee.png", alt: "Beach at sunset" },
+  { src: "/images/about-beach-alt.png", alt: "Beach scene" },
+  { src: "/images/IMG_5937-3c0828fe-0819-4c9a-96ab-9efd9bef1268.png", alt: "Dog portrait" },
 ];
 
 const IMAGES = [
   { src: USER_IMAGES[1].src, alt: USER_IMAGES[1].alt, external: false },
-  { src: NATURE_TRAIL_IMAGE, alt: "", external: true },
-  { src: BAKING_IMAGE, alt: "", external: false },
+  { src: NATURE_TRAIL_IMAGE, alt: "Forest trail", external: true },
+  { src: BAKING_IMAGE, alt: "Baking in the kitchen", external: false },
   { src: USER_IMAGES[0].src, alt: USER_IMAGES[0].alt, external: false },
   { src: USER_IMAGES[2].src, alt: USER_IMAGES[2].alt, external: false },
 ];
 
-const CARD_SIZE = { width: 168, height: 210 };
-const FLOAT_DELAYS = [0, 0.8, 1.6, 1.2, 2];
+/** Desktop scatter: positions around centered copy; optional bottom */
+type DesktopScatter = {
+  top?: string;
+  bottom?: string;
+  left?: string;
+  right?: string;
+  w: number;
+  h: number;
+  r: number;
+  z: number;
+};
 
-export function AboutImages() {
+/** Larger frames, pushed toward edges to frame the middle column */
+const DESKTOP_SCATTER: DesktopScatter[] = [
+  { top: "0%", left: "0%", w: 210, h: 264, r: -5.5, z: 2 },
+  { top: "1%", right: "0%", left: "auto", w: 228, h: 286, r: 6, z: 3 },
+  { top: "40%", left: "-2%", w: 200, h: 252, r: 3, z: 5 },
+  { top: "34%", right: "0%", left: "auto", w: 218, h: 274, r: -4, z: 2 },
+  { bottom: "5%", left: "3%", top: "auto", w: 224, h: 282, r: 4.5, z: 4 },
+];
+
+const MOBILE_TILT = [-3, 4, -2, 3.5, -4] as const;
+const MOBILE_SHIFT = ["", "translate-x-3 -translate-y-2", "-translate-x-2 translate-y-4", "translate-x-1", "-translate-x-3 translate-y-2"] as const;
+
+type AboutImagesProps = {
+  /** When true, absolutely positioned to surround centered content (desktop) */
+  surround?: boolean;
+  showDesktop?: boolean;
+  showMobile?: boolean;
+};
+
+export function AboutImages({
+  surround = false,
+  showDesktop = true,
+  showMobile = true,
+}: AboutImagesProps) {
+  const desktopSectionClass = surround
+    ? "hidden lg:block absolute inset-x-0 top-0 min-h-[min(128vh,1360px)] w-full max-w-[1600px] mx-auto pointer-events-none [&_*]:pointer-events-auto"
+    : "hidden lg:block relative w-full min-h-[min(92vh,980px)] mx-auto";
+
   return (
     <>
-      <section className="hidden lg:block w-full mx-auto">
-        <div className="flex flex-wrap justify-center gap-6" style={{ maxWidth: 580 }}>
-          {IMAGES.map((img, i) => (
-            <motion.div
-              key={img.external ? img.src : img.src}
-              className="relative rounded-xl overflow-hidden flex-shrink-0 glass animate-float-collage"
-              style={{
-                width: CARD_SIZE.width,
-                height: CARD_SIZE.height,
-                animationDelay: `${FLOAT_DELAYS[i]}s`,
-                boxShadow: "0 12px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.06)",
-              }}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.35, delay: i * 0.06 }}
-              whileHover={{
-                scale: 1.03,
-                transition: { duration: 0.2 },
-                boxShadow: "0 16px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(181, 90, 117, 0.25)",
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover rounded-xl"
-                sizes="180px"
-                unoptimized={!img.external}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {showDesktop && (
+        <section className={desktopSectionClass} aria-label="Photo collage">
+          {IMAGES.map((img, i) => {
+            const spec = DESKTOP_SCATTER[i];
+            return (
+              <motion.div
+                key={img.external ? img.src : img.src}
+                className="absolute rounded-2xl overflow-hidden glass ring-1 ring-[var(--accent-pink)]/25 shadow-[0_18px_48px_rgba(0,0,0,0.2)] cursor-default"
+                style={{
+                  ...(spec.top !== undefined ? { top: spec.top } : {}),
+                  ...(spec.bottom !== undefined ? { bottom: spec.bottom } : {}),
+                  ...(spec.left !== undefined ? { left: spec.left } : {}),
+                  ...(spec.right !== undefined ? { right: spec.right } : {}),
+                  width: spec.w,
+                  height: spec.h,
+                  zIndex: spec.z,
+                  rotate: spec.r,
+                }}
+                initial={{ opacity: 0, scale: 0.92, y: 24 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ type: "spring", stiffness: 260, damping: 26, delay: i * 0.07 }}
+                whileHover={{
+                  scale: 1.04,
+                  rotate: spec.r * 0.45,
+                  zIndex: 20,
+                  boxShadow: "0 24px 56px rgba(0,0,0,0.24), 0 0 0 1px rgba(242,196,206,0.4)",
+                  transition: { duration: 0.22 },
+                }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover rounded-2xl"
+                  sizes="240px"
+                  unoptimized={!img.external}
+                />
+              </motion.div>
+            );
+          })}
+        </section>
+      )}
 
-      <section className="lg:hidden py-6">
-        <div className="grid grid-cols-2 gap-5 max-w-sm mx-auto">
+      {showMobile && (
+      <section className="lg:hidden py-6" aria-label="Photo collage">
+        <div className="flex flex-wrap justify-center items-start gap-x-3 gap-y-8 px-2 max-w-lg mx-auto">
           {IMAGES.map((img, i) => (
             <motion.div
               key={img.external ? img.src : img.src}
-              className={`relative rounded-xl overflow-hidden glass ${i === 0 ? "col-span-2" : ""}`}
+              className={`relative rounded-2xl overflow-hidden glass ring-1 ring-[var(--accent-pink)]/25 shadow-[0_14px_36px_rgba(0,0,0,0.16)] ${MOBILE_SHIFT[i] ?? ""}`}
               style={{
-                aspectRatio: i === 0 ? "2/1" : "3/4",
-                boxShadow: "0 12px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.06)",
+                width: i === 0 ? "48%" : i === 4 ? "54%" : "44%",
+                aspectRatio: i === 0 ? "4/5" : "3/4",
+                rotate: MOBILE_TILT[i],
               }}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.05 }}
-              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              whileHover={{ scale: 1.03, zIndex: 10 }}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover rounded-xl"
-                sizes="(max-width: 640px) 100vw, 200px"
+                className="object-cover rounded-2xl"
+                sizes="(max-width: 640px) 50vw, 240px"
                 unoptimized={!img.external}
               />
             </motion.div>
           ))}
         </div>
       </section>
+      )}
     </>
   );
 }

@@ -7,6 +7,14 @@ export interface Project {
   tools: string[];
   results: string;
   gradient: string;
+  /** Organized report (Notion, PDF, Colab with graphs, etc.) */
+  reportUrl?: string;
+  /** Link to datasets */
+  datasetUrl?: string;
+  /** Link to research / write-up */
+  researchUrl?: string;
+  /** Link to code (repo, Colab, etc.); falls back to githubUrl if not set */
+  codeUrl?: string;
   githubUrl?: string;
   imageUrl?: string;
 }

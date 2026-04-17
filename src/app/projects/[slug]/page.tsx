@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getProjectBySlug, projects } from "@/data/projects";
-import Background from "@/components/Background";
 import ProjectResults from "./ProjectResults";
 
 export async function generateStaticParams() {
@@ -16,12 +15,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <Background />
-      <div className="relative min-h-screen px-6 pt-24 pb-20">
+      <div className="relative z-[2] min-h-screen px-5 sm:px-6 pt-24 pb-20">
         <div className="max-w-3xl mx-auto">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 text-[var(--muted)] hover:text-accent text-sm font-medium mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-[var(--muted)] hover:text-[var(--accent-peach)] text-sm font-medium mb-8 transition-colors"
           >
             ← Back to Projects
           </Link>
@@ -43,21 +41,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
           )}
 
-          <div className="glass rounded-2xl p-6 sm:p-8 space-y-8">
+          <div className="glass rounded-2xl p-6 sm:p-8 space-y-8 border border-[var(--ui-border)]">
             <div>
-              <h2 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+              <h2 className="text-sm font-semibold text-[var(--accent-peach)] uppercase tracking-wider mb-2">
                 Problem
               </h2>
               <p className="text-[var(--muted)] leading-relaxed">{project.problem}</p>
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+              <h2 className="text-sm font-semibold text-[var(--accent-peach)] uppercase tracking-wider mb-2">
                 Approach
               </h2>
               <p className="text-[var(--muted)] leading-relaxed">{project.approach}</p>
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+              <h2 className="text-sm font-semibold text-[var(--accent-peach)] uppercase tracking-wider mb-2">
                 Tools
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -72,23 +70,60 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+              <h2 className="text-sm font-semibold text-[var(--accent-peach)] uppercase tracking-wider mb-2">
                 Results
               </h2>
               <p className="text-[var(--muted)] leading-relaxed">
                 <ProjectResults text={project.results} />
               </p>
             </div>
-            {project.githubUrl && (
+            {((project.reportUrl ?? project.datasetUrl ?? project.researchUrl ?? project.codeUrl ?? project.githubUrl)) && (
               <div className="pt-2">
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass text-[var(--text)] border border-black/10 hover:border-accent/40 hover:text-accent transition-all font-medium text-sm glow-hover"
-                >
-                  View on GitHub →
-                </a>
+                <h2 className="text-sm font-semibold text-[var(--text-heading)] mb-3">
+                  Resources
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {project.reportUrl && (
+                    <a
+                      href={project.reportUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass text-[var(--text)] border border-[var(--ui-border-strong)] hover:border-[var(--accent-peach)]/45 hover:text-[var(--accent-peach)] transition-all font-medium text-sm glow-hover"
+                    >
+                      View Report →
+                    </a>
+                  )}
+                  {project.datasetUrl && (
+                    <a
+                      href={project.datasetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass text-[var(--text)] border border-[var(--ui-border-strong)] hover:border-[var(--accent-peach)]/45 hover:text-[var(--accent-peach)] transition-all font-medium text-sm glow-hover"
+                    >
+                      Datasets →
+                    </a>
+                  )}
+                  {project.researchUrl && (
+                    <a
+                      href={project.researchUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass text-[var(--text)] border border-[var(--ui-border-strong)] hover:border-[var(--accent-peach)]/45 hover:text-[var(--accent-peach)] transition-all font-medium text-sm glow-hover"
+                    >
+                      Research →
+                    </a>
+                  )}
+                  {(project.codeUrl ?? project.githubUrl) && (
+                    <a
+                      href={project.codeUrl ?? project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass text-[var(--text)] border border-[var(--ui-border-strong)] hover:border-[var(--accent-peach)]/45 hover:text-[var(--accent-peach)] transition-all font-medium text-sm glow-hover"
+                    >
+                      Code →
+                    </a>
+                  )}
+                </div>
               </div>
             )}
           </div>
