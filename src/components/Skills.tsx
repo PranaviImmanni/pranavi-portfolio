@@ -12,7 +12,7 @@ export default function Skills() {
   const last = skillIconSlides.length - 1;
 
   return (
-    <section id="skills" className="relative z-[2] py-14 md:py-20 px-5 sm:px-6">
+    <section id="skills" className="relative z-[2] scroll-mt-28 py-14 md:py-20 px-5 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <SectionHeading title="Tech Stack" />
 
@@ -41,9 +41,9 @@ export default function Skills() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={slide.label}
-                  initial={{ opacity: 0, x: 14 }}
+                  initial={{ opacity: 1, x: 12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -14 }}
+                  exit={{ opacity: 0, x: -12 }}
                   transition={{ duration: 0.25 }}
                   className="grid grid-cols-4 gap-4 sm:gap-5 md:gap-6 justify-items-center"
                 >

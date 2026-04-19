@@ -91,7 +91,7 @@ function YearRing({
   const g = glowFor(accent);
   return (
     <div
-      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 bg-[var(--canvas-deep)] font-exp-display text-sm font-bold tabular-nums sm:h-16 sm:w-16 sm:text-base"
+      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 bg-[var(--canvas-deep)] font-exp-display text-sm font-extrabold tabular-nums sm:h-16 sm:w-16 sm:text-base"
       style={{ borderColor: accent, color: accent, boxShadow: `0 0 28px ${g}, inset 0 0 0 1px rgba(255,255,255,0.06)` }}
     >
       {label}

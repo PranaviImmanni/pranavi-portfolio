@@ -4,6 +4,7 @@ import "./globals.css";
 import QuoteModal from "@/components/QuoteModal";
 import Background from "@/components/Background";
 import Header from "@/components/Header";
+import HomeHashScroll from "@/components/HomeHashScroll";
 import FallingPetals from "@/components/FallingPetals";
 
 const spaceGrotesk = Space_Grotesk({
@@ -56,6 +57,7 @@ export default function RootLayout({
         <FallingPetals />
         <QuoteModal />
         <Header />
+        <HomeHashScroll />
         {children}
       </body>
     </html>

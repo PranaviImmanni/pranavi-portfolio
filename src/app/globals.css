@@ -7,10 +7,10 @@
  * Deep/mid grays lifted · #D6D6D6 silver text · coral / pink accents
  */
 :root {
-  /* Light tan canvas with soft peach and blush glows */
-  --canvas-deep: #f4ede5;
-  --canvas: #f7f1e9;
-  --canvas-elevated: #fffaf5;
+  /* White canvas with soft peach / blush accents (no tan base) */
+  --canvas-deep: #f3f3f5;
+  --canvas: #ffffff;
+  --canvas-elevated: #ffffff;
 
   --text: #3b3640;
   --text-heading: #27212f;
@@ -41,9 +41,9 @@
   --ui-surface: rgba(255, 255, 255, 0.85);
   --ui-surface-hover: rgba(255, 255, 255, 0.96);
 
-  --nav-bg: rgba(255, 249, 242, 0.94);
-  --shadow-soft: 0 18px 45px rgba(177, 157, 134, 0.2);
-  --shadow-card: 0 10px 36px rgba(179, 153, 131, 0.18);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --shadow-soft: 0 18px 45px rgba(120, 110, 100, 0.12);
+  --shadow-card: 0 10px 36px rgba(120, 110, 100, 0.1);
   --glow-accent: 0 9px 40px rgba(245, 143, 124, 0.26);
 
   --radius-sm: 0.75rem;
@@ -57,28 +57,21 @@ html {
 }
 
 body {
-  background-color: #f8f1e8;
-  /* Warm tan paper base with soft blush & peach blooms */
+  background-color: #ffffff;
+  /* White base + very soft coral / blush (no tan) */
   background-image:
-    radial-gradient(ellipse 120% 80% at 50% -18%, rgba(245, 143, 124, 0.14) 0%, transparent 46%),
-    radial-gradient(ellipse 90% 70% at 6% 0%, rgba(242, 196, 206, 0.15) 0%, transparent 52%),
-    radial-gradient(ellipse 75% 60% at 100% 12%, rgba(247, 231, 214, 0.92) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 0% 100%, rgba(228, 215, 200, 0.35) 0%, transparent 58%),
-    radial-gradient(ellipse 55% 45% at 94% 88%, rgba(236, 220, 203, 0.65) 0%, transparent 60%),
-    linear-gradient(
-      130deg,
-      #fffaf4 0%,
-      #f8efe3 25%,
-      #f4ebdf 52%,
-      #f9f2ea 78%,
-      #fffaf5 100%
-    ),
+    radial-gradient(ellipse 120% 80% at 50% -18%, rgba(245, 143, 124, 0.08) 0%, transparent 46%),
+    radial-gradient(ellipse 90% 70% at 6% 0%, rgba(242, 196, 206, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 75% 60% at 100% 12%, rgba(255, 255, 255, 0.95) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 0% 100%, rgba(245, 143, 124, 0.04) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 94% 88%, rgba(242, 196, 206, 0.06) 0%, transparent 60%),
+    linear-gradient(130deg, #ffffff 0%, #fafafa 45%, #ffffff 100%),
     linear-gradient(
       40deg,
-      rgba(255, 250, 244, 0.65) 0%,
-      rgba(242, 196, 206, 0.16) 26%,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(242, 196, 206, 0.06) 28%,
       transparent 52%,
-      rgba(245, 143, 124, 0.12) 78%,
+      rgba(245, 143, 124, 0.05) 78%,
       transparent 100%
     );
   background-attachment: fixed;
@@ -242,4 +235,24 @@ body {
 :focus-visible {
   outline: 2px solid rgba(245, 143, 124, 0.65);
   outline-offset: 3px;
+}
+
+/*
+ * Hero PRANAVI — Modak bubble outline: transparent fill + pink stroke.
+ * Keep shadows minimal — heavy stacks read as a solid pink “fill” in the browser.
+ * Glow stays on .hero-name-glass-glow wrapper.
+ */
+.hero-name-glass {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.07em #e6499a;
+  text-shadow:
+    -0.02em -0.02em 0 rgba(255, 255, 255, 0.55),
+    0.025em 0.03em 0 rgba(190, 24, 93, 0.25);
+}
+
+.hero-name-glass-glow {
+  filter: drop-shadow(0 0 14px rgba(236, 72, 153, 0.5))
+    drop-shadow(0 0 32px rgba(244, 114, 182, 0.38))
+    drop-shadow(0 0 48px rgba(251, 207, 232, 0.4));
 }

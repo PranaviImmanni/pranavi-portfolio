@@ -33,17 +33,17 @@ type DesktopScatter = {
   z: number;
 };
 
-/** Larger frames, pushed toward edges to frame the middle column */
+/** Frames around the middle column — slightly compact so copy stays the focus */
 const DESKTOP_SCATTER: DesktopScatter[] = [
-  { top: "0%", left: "0%", w: 210, h: 264, r: -5.5, z: 2 },
-  { top: "1%", right: "0%", left: "auto", w: 228, h: 286, r: 6, z: 3 },
-  { top: "40%", left: "-2%", w: 200, h: 252, r: 3, z: 5 },
-  { top: "34%", right: "0%", left: "auto", w: 218, h: 274, r: -4, z: 2 },
-  { bottom: "5%", left: "3%", top: "auto", w: 224, h: 282, r: 4.5, z: 4 },
+  { top: "0%", left: "0%", w: 184, h: 232, r: -5.5, z: 2 },
+  { top: "1%", right: "0%", left: "auto", w: 200, h: 250, r: 6, z: 3 },
+  { top: "40%", left: "1.5%", w: 176, h: 220, r: 3, z: 5 },
+  { top: "34%", right: "0%", left: "auto", w: 192, h: 240, r: -4, z: 2 },
+  { bottom: "5%", left: "3%", top: "auto", w: 196, h: 246, r: 4.5, z: 4 },
 ];
 
 const MOBILE_TILT = [-3, 4, -2, 3.5, -4] as const;
-const MOBILE_SHIFT = ["", "translate-x-3 -translate-y-2", "-translate-x-2 translate-y-4", "translate-x-1", "-translate-x-3 translate-y-2"] as const;
+const MOBILE_SHIFT = ["", "translate-x-3 -translate-y-2", "translate-x-1 translate-y-4", "translate-x-1", "-translate-x-3 translate-y-2"] as const;
 
 type AboutImagesProps = {
   /** When true, absolutely positioned to surround centered content (desktop) */
@@ -98,7 +98,7 @@ export function AboutImages({
                   alt={img.alt}
                   fill
                   className="object-cover rounded-2xl"
-                  sizes="240px"
+                  sizes="200px"
                   unoptimized={!img.external}
                 />
               </motion.div>
@@ -109,13 +109,13 @@ export function AboutImages({
 
       {showMobile && (
       <section className="lg:hidden py-6" aria-label="Photo collage">
-        <div className="flex flex-wrap justify-center items-start gap-x-3 gap-y-8 px-2 max-w-lg mx-auto">
+        <div className="flex flex-wrap justify-center items-start gap-x-3 gap-y-8 px-2 max-w-md mx-auto">
           {IMAGES.map((img, i) => (
             <motion.div
               key={img.external ? img.src : img.src}
               className={`relative rounded-2xl overflow-hidden glass ring-1 ring-[var(--accent-pink)]/25 shadow-[0_14px_36px_rgba(0,0,0,0.16)] ${MOBILE_SHIFT[i] ?? ""}`}
               style={{
-                width: i === 0 ? "48%" : i === 4 ? "54%" : "44%",
+                width: i === 0 ? "42%" : i === 4 ? "48%" : "38%",
                 aspectRatio: i === 0 ? "4/5" : "3/4",
                 rotate: MOBILE_TILT[i],
               }}
@@ -130,7 +130,7 @@ export function AboutImages({
                 alt={img.alt}
                 fill
                 className="object-cover rounded-2xl"
-                sizes="(max-width: 640px) 50vw, 240px"
+                sizes="(max-width: 640px) 42vw, 200px"
                 unoptimized={!img.external}
               />
             </motion.div>

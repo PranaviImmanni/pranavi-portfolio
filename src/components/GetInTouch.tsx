@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Linkedin, Github, Instagram } from "lucide-react";
+import { Linkedin, Github, Mail } from "lucide-react";
 
 const EMAILJS_SERVICE_ID = "service_j4isi7i";
 const EMAILJS_TEMPLATE_ID = "template_oe75h15";
 const EMAILJS_PUBLIC_KEY = "CX73TEtKRadPlhTtA";
 
-/** Replace with your Instagram profile URL when ready */
-const INSTAGRAM_URL = "https://www.instagram.com/";
+const CONTACT_EMAIL = "pranavi@immanni.com";
 
 const inputClass =
   "w-full rounded-2xl border border-[var(--ui-border)] bg-white/75 px-4 py-3 font-exp-display text-sm text-[#2c2b30] placeholder:text-[#2c2b30]/45 placeholder:italic focus:outline-none focus:ring-2 focus:ring-[var(--accent-peach)]/40 focus:border-[var(--accent-peach)]/45 transition shadow-sm tracking-[0.01em]";
@@ -126,9 +125,14 @@ export default function GetInTouch() {
                 <Linkedin className="h-4 w-4 shrink-0 text-[var(--accent-coral)]" strokeWidth={1.75} aria-hidden />
                 LinkedIn
               </a>
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={socialClass}>
-                <Instagram className="h-4 w-4 shrink-0 text-[var(--accent-coral)]" strokeWidth={1.75} aria-hidden />
-                Instagram
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className={socialClass}
+                title={CONTACT_EMAIL}
+                aria-label={`Email ${CONTACT_EMAIL}`}
+              >
+                <Mail className="h-4 w-4 shrink-0 text-[var(--accent-coral)]" strokeWidth={1.75} aria-hidden />
+                <span className="normal-case">Email</span>
               </a>
               <a
                 href="https://github.com/PranaviImmanni/PranaviImmanni"

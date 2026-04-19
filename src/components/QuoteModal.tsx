@@ -69,7 +69,7 @@ export default function QuoteModal() {
       {open && quote && (
         <>
           <motion.div
-            className="fixed inset-0 z-[100] bg-black/45 backdrop-blur-md"
+            className="fixed inset-0 z-[1100] bg-black/45 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export default function QuoteModal() {
             aria-hidden
           />
           <motion.div
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-[90%] max-w-md px-2"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1101] w-[90%] max-w-md px-2"
             initial={{ opacity: 0, scale: 0.98, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 10 }}
@@ -125,7 +125,7 @@ export default function QuoteModal() {
               <p className="relative text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent-peach)] mb-4">
                 Daily inspiration
               </p>
-              <p className="relative text-[var(--text)] text-lg sm:text-xl leading-relaxed mb-8 font-normal">
+              <p className="relative text-white text-lg sm:text-xl leading-relaxed mb-8 font-normal">
                 &ldquo;{quote}&rdquo;
               </p>
               <div className="relative flex justify-end">
