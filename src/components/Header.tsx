@@ -40,16 +40,16 @@ export default function Header() {
       initial={false}
       animate={{ y: 0, opacity: 1 }}
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-6xl mx-auto flex min-w-0 items-center justify-between gap-2 px-5 sm:px-6 lg:px-8 py-4">
         <Link
           href="/"
-          className={`flex items-center gap-3 group ${brandMark.className}`}
+          className={`flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:flex-initial group ${brandMark.className}`}
           aria-label="Pranavi Immanni — home"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--ui-border)] bg-[var(--ui-surface)] text-[10px] font-bold tracking-[0.12em] text-[var(--text-heading)] transition group-hover:border-[var(--accent-peach)]/45 group-hover:bg-[var(--ui-surface-hover)]">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--ui-border)] bg-[var(--ui-surface)] text-[9px] font-bold tracking-[0.12em] text-[var(--text-heading)] transition group-hover:border-[var(--accent-peach)]/45 group-hover:bg-[var(--ui-surface-hover)] sm:h-8 sm:w-8 sm:text-[10px]">
             PI
           </span>
-          <span className="hidden sm:inline text-[12px] sm:text-[13px] font-semibold tracking-[0.1em] text-[var(--text-heading)] uppercase">
+          <span className="min-w-0 truncate text-[10px] font-semibold uppercase tracking-[0.06em] text-[var(--text-heading)] sm:text-[12px] sm:tracking-[0.1em] md:text-[13px]">
             Pranavi Immanni
           </span>
         </Link>
