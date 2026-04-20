@@ -83,7 +83,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="hero-pill-tray inline-flex w-auto max-w-full items-center gap-2 rounded-full px-3 py-2"
+            className="hero-pill-tray inline-flex w-fit max-w-full shrink-0 items-center gap-1 self-center rounded-full px-2 py-1.5 sm:gap-1.5 sm:px-2.5 sm:py-1.5"
             initial={reduceMotion ? false : { y: 8 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.45, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
@@ -92,34 +92,34 @@ export default function Hero() {
               href="https://www.linkedin.com/in/pranavi-immanni-jrt/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hero-social-link p-3.5 rounded-full text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
+              className="hero-social-link rounded-full p-2 text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
               aria-label="LinkedIn"
             >
-              <Linkedin className="w-6 h-6" strokeWidth={1.65} />
+              <Linkedin className="h-5 w-5" strokeWidth={1.65} />
             </a>
             <a
               href="https://github.com/PranaviImmanni/PranaviImmanni"
               target="_blank"
               rel="noopener noreferrer"
-              className="hero-social-link p-3.5 rounded-full text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
+              className="hero-social-link rounded-full p-2 text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
               aria-label="GitHub"
             >
-              <Github className="w-6 h-6" strokeWidth={1.65} />
+              <Github className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" strokeWidth={1.65} />
             </a>
             <a
               href="mailto:pranavi@immanni.com"
-              className="hero-social-link p-3.5 rounded-full text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
+              className="hero-social-link rounded-full p-2 text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
               aria-label="Email"
             >
-              <Mail className="w-6 h-6" strokeWidth={1.65} />
+              <Mail className="h-5 w-5" strokeWidth={1.65} />
             </a>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new CustomEvent("portfolio-open-quote"))}
-              className="hero-social-link p-3.5 rounded-full text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
+              className="hero-social-link rounded-full p-2 text-[var(--text-heading)] hover:bg-[var(--ui-surface-hover)]"
               aria-label="Open daily inspiration"
             >
-              <Quote className="w-6 h-6" strokeWidth={1.65} />
+              <Quote className="h-5 w-5" strokeWidth={1.65} />
             </button>
           </motion.div>
         </motion.div>

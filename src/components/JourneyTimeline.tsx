@@ -283,14 +283,14 @@ function TimelineColumn({
       {yearUp ? (
         <>
           <div className="flex flex-1 flex-col items-center justify-end gap-1 pb-1">
-            <YearRing label={entry.yearLabel} accent={accent} />
-            <VConnector accent={accent} />
+            <YearRing label={entry.yearLabel} accent={pillAccent} />
+            <VConnector accent={pillAccent} />
           </div>
           <div className="flex shrink-0 justify-center">
             <AxisPill label={entry.pillLabel} accent={pillAccent} tail={tail} textColor={pillTextColor} />
           </div>
           <div className="flex flex-1 flex-col items-center justify-start gap-1 pt-2">
-            <VConnector accent={accent} flip />
+            <VConnector accent={pillAccent} flip />
             <div className="flex justify-center px-1">{body}</div>
           </div>
         </>
@@ -298,14 +298,14 @@ function TimelineColumn({
         <>
           <div className="flex flex-1 flex-col items-center justify-end gap-1 pb-2">
             <div className="flex justify-center px-1">{body}</div>
-            <VConnector accent={accent} />
+            <VConnector accent={pillAccent} />
           </div>
           <div className="flex shrink-0 justify-center">
             <AxisPill label={entry.pillLabel} accent={pillAccent} tail={tail} textColor={pillTextColor} />
           </div>
           <div className="flex flex-1 flex-col items-center justify-start gap-1 pt-1">
-            <VConnector accent={accent} flip />
-            <YearRing label={entry.yearLabel} accent={accent} />
+            <VConnector accent={pillAccent} flip />
+            <YearRing label={entry.yearLabel} accent={pillAccent} />
           </div>
         </>
       )}
