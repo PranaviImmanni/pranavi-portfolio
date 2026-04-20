@@ -75,23 +75,9 @@ export default function GetInTouch() {
   return (
     <section
       id="contact"
-      className="relative z-[2] overflow-hidden px-5 py-14 pb-12 sm:px-6 md:py-16 md:pb-14"
+      className="relative z-[2] scroll-mt-28 px-5 py-14 md:py-20 sm:px-6"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/images/get-in-touch-bg.png)" }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[var(--accent-pink)]/14 via-white/[0.08] to-[var(--accent-coral)]/10"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[var(--canvas-deep)]/[0.04]"
-        aria-hidden
-      />
-
-      <div className="relative z-[1] mx-auto max-w-5xl font-exp-display tracking-[0.02em]">
+      <div className="mx-auto max-w-5xl font-exp-display tracking-[0.02em]">
         <motion.div
           className="mx-auto flex max-w-2xl flex-col gap-7 text-left sm:gap-8"
           initial={{ y: 18 }}

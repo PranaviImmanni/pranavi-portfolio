@@ -78,17 +78,21 @@ export default function QuoteModal() {
             aria-hidden
           />
           <motion.div
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1101] w-[90%] max-w-md px-2"
-            initial={{ opacity: 0, scale: 0.98, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+            className="fixed inset-0 z-[1101] flex items-center justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))] sm:px-6 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             role="dialog"
             aria-modal="true"
             aria-label="Daily inspiration"
           >
-            <div
-              className="relative rounded-2xl p-7 sm:p-8 overflow-hidden border border-[var(--ui-border)]"
+            <motion.div
+              className="relative w-full min-w-0 max-w-md rounded-2xl p-7 sm:p-8 overflow-x-hidden overflow-y-auto max-h-[min(85dvh,32rem)] border border-[var(--ui-border)] pointer-events-auto"
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: 8 }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
               style={{
                 background:
                   "linear-gradient(155deg, rgba(74,73,80,0.94) 0%, rgba(104,103,114,0.92) 100%)",
@@ -125,7 +129,7 @@ export default function QuoteModal() {
               <p className="relative text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent-peach)] mb-4">
                 Daily inspiration
               </p>
-              <p className="relative text-white text-lg sm:text-xl leading-relaxed mb-8 font-normal">
+              <p className="relative text-white text-lg sm:text-xl leading-relaxed mb-8 font-normal break-words [overflow-wrap:anywhere] [hyphens:auto]">
                 &ldquo;{quote}&rdquo;
               </p>
               <div className="relative flex justify-end">
@@ -137,7 +141,7 @@ export default function QuoteModal() {
                   Close
                 </button>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </>
       )}
